@@ -27,8 +27,11 @@ compose:
   #zabbix_ip_list: zabbix_interfaces | map(attribute='ip')
   #zabbix_verbose_status: zabbix_status.replace("1", "Disabled").replace("0", "Enabled")
 
+#keyed_groups:
+#  - key: zabbix_groups | map(attribute='name')
+#    separator: ""
 keyed_groups:
-  - key: zabbix_groups | map(attribute='name')
+  - key: zabbix_groups
     separator: ""
 
 groups:
