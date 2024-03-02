@@ -23,3 +23,6 @@ validate_certs: false
 # compose:
 #   ansible_host: (zbx_interfaces | selectattr('type','==','1') | first).ip
 
+keyed_groups:
+  - key: zabbix_groups | map(attribute='name')
+    separator: ""
