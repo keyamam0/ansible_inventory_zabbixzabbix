@@ -15,17 +15,19 @@ validate_certs: false
 
 host_zapi_query:
   selectInterfaces: 'extend'
-  
+
 cache: true
 cache_plugin: jsonfile
 cache_timeout: 7200
 cache_connection: /tmp/zabbix_inventory
 query:
   selectGroups: ['name']
+  selectInterfaces: ['ip']
 
 compose:
   zabbix_verbose_status: zabbix_status.replace("1", "Disabled").replace("0", "Enabled")
   ansible_host: (zbx_interfaces | selectattr('type','==','1') | first).ip
+  zabbix_ip_list: zabbix_interfaces | map(attribute='ip')
 
 groups:
   enabled: zabbix_status == "0"
