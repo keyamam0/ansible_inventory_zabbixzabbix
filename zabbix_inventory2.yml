@@ -24,6 +24,7 @@ query:
 
 compose:
   ansible_host: zabbix_interfaces | map(attribute='ip') | first
+  ansible_groups: zabbix_groups | map(attribute='name') | list
   #zabbix_ip_list: zabbix_interfaces | map(attribute='ip')
   #zabbix_verbose_status: zabbix_status.replace("1", "Disabled").replace("0", "Enabled")
 
