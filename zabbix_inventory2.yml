@@ -2,26 +2,16 @@
 # zabbix_inventory.yml
 plugin: zabbix.zabbix.zabbix_inventory
 
-#env ZABBIX_SERVERでInject
-#server_url: "https://xxx.xxx.xxx.xxx"
-#add_zabbix_groups: true
+#env ZABBIX_API_URLでInject (CommunityだとZABBIX_SERVERでInject)
+#zabbix_api_url: "https://xxx.xxx.xxx.xxx"
 
-#env ZABBIX_USERNAMEでInject
-#login_user: Admin
+#env ZABBIX_USERでInject(CommunityだとZABBIX_USERNAMEでInject)
+#zabbix_user: Admin
 
 #env ZABBIX_PASSWORDでInject
-#login_password: "xxxxxxxxx"
+#zabbix_password: "xxxxxxxxx"
 
-# host_zapi_query:
-#   selectInterfaces: 'extend'
 validate_certs: false
-
-# groups:
-#   enabled: zbx_status == "0"
-#   disabled: zbx_status == "1"
-
-# compose:
-#   ansible_host: (zbx_interfaces | selectattr('type','==','1') | first).ip
 
 cache: true
 cache_plugin: jsonfile
@@ -29,7 +19,12 @@ cache_timeout: 7200
 cache_connection: /tmp/zabbix_inventory
 query:
   selectGroups: ['name']
-  
+
+compose:
+  zabbix_verbose_status: zabbix_status.replace("1", "Disabled").replace("0", "Enabled")
+groups:
+  enabled: zabbix_status == "0"
+  disabled: zabbix_status == "1"
 keyed_groups:
   - key: zabbix_groups | map(attribute='name')
     separator: ""
