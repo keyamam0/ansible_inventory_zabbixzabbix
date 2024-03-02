@@ -31,7 +31,7 @@ compose:
 #  - key: zabbix_groups | map(attribute='name')
 #    separator: ""
 keyed_groups:
-  - key: zabbix_groups
+  - key: zabbix_groups | map(attribute='name') | list
     separator: ""
 
 groups:
