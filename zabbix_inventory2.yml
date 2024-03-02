@@ -23,6 +23,13 @@ validate_certs: false
 # compose:
 #   ansible_host: (zbx_interfaces | selectattr('type','==','1') | first).ip
 
+cache: true
+cache_plugin: jsonfile
+cache_timeout: 7200
+cache_connection: /tmp/zabbix_inventory
+query:
+  selectGroups: ['name']
+  
 keyed_groups:
   - key: zabbix_groups | map(attribute='name')
     separator: ""
