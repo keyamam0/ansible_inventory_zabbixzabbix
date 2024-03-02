@@ -13,6 +13,9 @@ plugin: zabbix.zabbix.zabbix_inventory
 
 validate_certs: false
 
+host_zapi_query:
+  selectInterfaces: 'extend'
+  
 cache: true
 cache_plugin: jsonfile
 cache_timeout: 7200
