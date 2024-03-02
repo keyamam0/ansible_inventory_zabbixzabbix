@@ -23,16 +23,15 @@ query:
   selectInterfaces: ['ip']
 
 compose:
+  #属性追加ansible_host <-IPアドレス
   ansible_host: zabbix_interfaces | map(attribute='ip') | first
+  #属性追加ansible_groups <-後で条件文に使いやすいように、グループをDictionaryからListにして格納
   ansible_groups: zabbix_groups | map(attribute='name') | list
   #zabbix_ip_list: zabbix_interfaces | map(attribute='ip')
   #zabbix_verbose_status: zabbix_status.replace("1", "Disabled").replace("0", "Enabled")
 
-#keyed_groups:
-#  - key: zabbix_groups | map(attribute='name')
-#    separator: ""
 keyed_groups:
-  - key: zabbix_groups | map(attribute='name') | list
+  - key: zabbix_groups | map(attribute='name')
     separator: ""
 
 groups:
