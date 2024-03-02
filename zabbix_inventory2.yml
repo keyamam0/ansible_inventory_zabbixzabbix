@@ -26,13 +26,14 @@ query:
   selectInterfaces: ['ip']
 
 compose:
-  zabbix_verbose_status: zabbix_status.replace("1", "Disabled").replace("0", "Enabled")
+  #zabbix_verbose_status: zabbix_status.replace("1", "Disabled").replace("0", "Enabled")
   ansible_host: zabbix_interfaces | map(attribute='ip') | first
   #zabbix_ip_list: zabbix_interfaces | map(attribute='ip')
 
 groups:
   enabled: zabbix_status == "0"
   disabled: zabbix_status == "1"
+
 keyed_groups:
   - key: zabbix_groups | map(attribute='name')
     separator: ""
