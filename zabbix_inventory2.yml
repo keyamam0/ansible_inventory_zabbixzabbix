@@ -14,7 +14,7 @@ plugin: zabbix.zabbix.zabbix_inventory
 
 # host_zapi_query:
 #   selectInterfaces: 'extend'
-# validate_certs: false
+validate_certs: false
 
 # groups:
 #   enabled: zbx_status == "0"
