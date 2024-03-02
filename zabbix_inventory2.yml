@@ -22,9 +22,15 @@ query:
 
 compose:
   zabbix_verbose_status: zabbix_status.replace("1", "Disabled").replace("0", "Enabled")
+  ansible_host: (zbx_interfaces | selectattr('type','==','1') | first).ip
+
 groups:
   enabled: zabbix_status == "0"
   disabled: zabbix_status == "1"
 keyed_groups:
   - key: zabbix_groups | map(attribute='name')
     separator: ""
+
+
+
+
